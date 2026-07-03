@@ -10,4 +10,4 @@ Development is hosted at:
 https://github.com/brandon-rhodes/python-sgp4
 
 """
-__version__ = '2.26'
+__version__ = '2.27'
