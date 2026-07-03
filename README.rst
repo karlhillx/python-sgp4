@@ -655,6 +655,12 @@ https://pypi.org/project/sgp4/1.4/
 Changelog
 ---------
 
+2026-07-03 — 2.27
+
+* Moved the project documentation out of the ``__init__.py`` docstring
+  and into the source code README file, which should hopefully make the
+  documentation reappear on the project’s PyPI page.
+
 2026-06-26 — 2.26
 
 * The C++ module now limits itself to calling the Python Limited API and
