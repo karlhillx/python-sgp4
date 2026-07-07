@@ -125,7 +125,10 @@ class Satrec(object):
         * ``v``: velocity vectors in kilometers per second.
 
         """
-        # Import NumPy the first time sgp4_array() is called.
+        if len(jd) != len(fr):
+            raise ValueError('jd and fr must have the same length')
+
+        # Import NumPy lazily.
         from numpy import zeros
 
         jdlen = len(jd)
@@ -166,6 +169,9 @@ class SatrecArray(object):
         * ``v``: (dx,dy,dz) velocity vector in kilometers per second.
 
         """
+        if len(jd) != len(fr):
+            raise ValueError('jd and fr must have the same length')
+
         from numpy import zeros
 
         jdlen = len(jd)

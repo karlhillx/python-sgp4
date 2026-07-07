@@ -166,6 +166,17 @@ def test_satrecarray_logic_accepts_empty_arrays():
     assert r.shape == (1, 0, 3)
     assert v.shape == (1, 0, 3)
 
+def test_array_logic_rejects_arrays_of_different_lengths():
+    skip_under_python2()
+
+    import numpy as np
+
+    sat = Satrec.twoline2rv(LINE1, LINE2)
+    jd = np.array([2458827.5])
+    fr = np.array([])
+    assertRaises(ValueError, sat.sgp4_array, jd, fr)
+    assertRaises(ValueError, api.SatrecArray([sat]).sgp4, jd, fr)
+
 # ------------------------------------------------------------------------
 #                 Other Officially Supported Routines
 #
