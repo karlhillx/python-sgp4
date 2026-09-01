@@ -47,5 +47,11 @@ def initialize(sat, fields, gravconst=WGS72):
     nodeo = float(fields['RA_OF_ASC_NODE']) * _to_radians
     satnum = int(fields['NORAD_CAT_ID'])
 
-    sat.sgp4init(gravconst, 'i', satnum, epoch, bstar, ndot, nddot, ecco,
+    # OMM (CCSDS 502.0) is a modern XML/CSV/JSON format that carries the
+    # NORAD catalog ID as a plain integer, not the 5-character TLE column.
+    # Pass the number as a string so that sgp4init() skips `to_alpha5()`,
+    # which can only encode satnums up to 339999 ('Z9999'). The full
+    # integer round-trips correctly through `from_alpha5()` because a
+    # digit-led string is decoded as a plain `int(s)`.
+    sat.sgp4init(gravconst, 'i', str(satnum), epoch, bstar, ndot, nddot, ecco,
                  argpo, inclo, mo, no_kozai, nodeo)
